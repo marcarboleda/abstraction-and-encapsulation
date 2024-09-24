@@ -32,8 +32,7 @@ public:
         } else {
             accountBalance += amount;
             cout << "\nDeposited: " << amount << ". New balance: " << accountBalance << endl;
-        }
-        cout << endl;  
+        } 
     }
 
     bool withdraw(double amount) override {
@@ -161,7 +160,7 @@ int main() {
 
     BankAccount* selectedAccount = nullptr;
 
-    int mainChoice;
+    string mainChoice;
     do {
         cout << "Main Menu\n";
         cout << "[1] Savings Account\n[2] Current Account\n[3] Exit\n";
@@ -172,25 +171,27 @@ int main() {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Invalid input. Please enter a valid option." << endl;
-            cout << endl;  // New line for readability
+            cout << endl;  
             continue;
         }
 
-        switch (mainChoice) {
-            case 1: selectedAccount = &savingsAccount; break;
-            case 2: selectedAccount = &currentAccount; break;
-            case 3: cout << "\nExiting the system. Goodbye!\n" << endl; break;
-            default:
-                cout << "Invalid option. Please try again." << endl;
-                cout << endl;  // New line for readability
-                continue;
+        if (mainChoice == "1") {
+            selectedAccount = &savingsAccount;
+        } else if (mainChoice == "2") {
+            selectedAccount = &currentAccount; 
+        } else if (mainChoice == "3") {
+            cout << "\nExiting the system. Goodbye!\n" << endl;
+        } else {
+            cout << "Invalid option. Please try again." << endl;
+            cout << endl;
+            continue; 
         }
 
         if (selectedAccount) {
             accountMenu(selectedAccount);
-            selectedAccount = nullptr; // Reset selected account after returning to main menu
+            selectedAccount = nullptr; 
         }
-    } while (mainChoice != 3);
+    } while (mainChoice != "3");
 
     return 0;
 }
