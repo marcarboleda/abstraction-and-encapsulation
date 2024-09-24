@@ -115,43 +115,35 @@ double getValidAmount() {
 }
 
 void accountMenu(BankAccount* account) {
-    int subChoice;
+    string subChoice;
     do {
         cout << account->getName() << " Menu\n";
         cout << "[1] Deposit\n[2] Withdraw\n[3] Check Balance\n[4] Back\n";
         cout << "Select an option: ";
         cin >> subChoice;
 
-        switch (subChoice) {
-            case 1: {
-                cout << "\nEnter amount to deposit: ";
-                const double depositAmount = getValidAmount();
-                account->deposit(depositAmount);
-                break;
-            }
-            case 2: {
-                cout << "\nEnter amount to withdraw: ";
-                const double withdrawAmount = getValidAmount();
-                account->withdraw(withdrawAmount);
-                break;
-            }
-            case 3: {
-                double balance = account->checkBalance();
+        if (subChoice == "1") {
+            cout << "\nEnter amount to deposit: ";
+            const double depositAmount = getValidAmount();
+            account->deposit(depositAmount);
+        } else if (subChoice == "2") {
+            cout << "\nEnter amount to withdraw: ";
+            const double withdrawAmount = getValidAmount();
+            account->withdraw(withdrawAmount);
+        } else if (subChoice == "3") {
+            double balance = account->checkBalance();
                 if (balance > 0) {
                     cout << "\nCurrent Balance: " << balance << endl;
                 } else {
                     cout << "\nThere is no balance available." << endl;
-                }  
-                break;
-            }
-            case 4:
-                cout << "\nReturning to Main Menu..." << endl;
-                cout << endl; 
-                break;
-            default:
-                cout << "\nInvalid option. Please try again." << endl;
+                }
+        } else if (subChoice == "4") {
+            cout << "\nReturning to Main Menu..." << endl;
+            cout << endl; 
+        } else {
+            cout << "\nInvalid option. Please try again." << endl;
         }
-    } while (subChoice != 4);
+    } while (subChoice != "4");
 }
 
 int main() {
